@@ -32,9 +32,7 @@
   "bugs": {
     "url": "https://github.com/charliekassel/vuejs-autocomplete/issues"
   },
-  "dependencies": {
-    "abort-controller": "^3.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.12",
     "autoprefixer": "^6.7.2",
