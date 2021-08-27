@@ -36,7 +36,7 @@
     <ul v-show="showResults" class="autocomplete__results" :style="listStyle">
       <slot name="results">
         <!-- error -->
-        <li v-if="hasError" class="autocomplete__results__item autocomplete__results__item--error">{{ error }}</li>
+        <li v-if="hasError && !hideError" class="autocomplete__results__item autocomplete__results__item--error">{{ error }}</li>
 
         <!-- results -->
         <template v-if="!hasError">
@@ -62,6 +62,8 @@
 </template>
 
 <script type="text/babel">
+
+import AbortController from 'abort-controller'
 import debounce from 'lodash/debounce'
 export default {
   props: {
@@ -180,10 +182,16 @@ export default {
      */
     maxlength: {
       type: Number
+    },
+    hideError: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
+      sweets: [],
+      aborters: [],
       value: null,
       display: null,
       results: null,
@@ -263,20 +271,30 @@ export default {
         this.results = []
         return
       }
+
+      this.aborters.forEach((controller, index) => {
+        console.log(controller)
+        try { controller.abort() } catch (e) {}
+      })
+      let controller = new AbortController()
+      let signal = controller.signal
+      this.aborters.push(controller)
+      // let signalIndex = this.aborters.length - 1
       this.loading = true
       this.setEventListener()
-      this.request(url)
-    }, 200),
+      this.request(url, signal) // .then(this.aborters.splice(signalIndex, 1))
+    }, 340),
 
     /**
      * Make an http request for results
      * @param {String} url
      */
-    request (url) {
+    request (url, signal) {
       let promise = fetch(url, {
         method: this.method,
         credentials: this.getCredentials(),
-        headers: this.getHeaders()
+        headers: this.getHeaders(),
+        signal
       })
 
       return promise
