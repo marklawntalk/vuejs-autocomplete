@@ -531,73 +531,94 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.autocomplete
-  position relative
-  width 100%
-  *
-    box-sizing border-box
+<style lang="scss">
+.autocomplete {
+  position: relative;
+  width: 100%;
 
-.autocomplete__box
-  display flex
-  align-items center
-  background #fff
-  border: 1px solid #ccc
-  border-radius 3px
-  padding 0 5px
+  * {
+    box-sizing: border-box;
+  }
+}
 
-.autocomplete__searching
-  border-radius 3px 3px 0 0
+.autocomplete__box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 5px;
+}
 
-.autocomplete__inputs
-  flex-grow 1
-  padding 0 5px
-  input
-    width 100%
-    border 0
-    &:focus
-      outline none
+.autocomplete__searching {
+  border-radius: 3px 3px 0 0;
+}
 
-.autocomplete--clear
-  cursor pointer
+.autocomplete__inputs {
+  flex-grow: 1;
+  padding: 0 5px;
 
-.autocomplete__results
-  margin 0
-  padding 0
-  list-style-type none
-  z-index 1000
-  position absolute
-  max-height 400px
-  overflow-y auto
-  background white
-  width 100%
-  border 1px solid #ccc
-  border-top 0
-  color black
+  input {
+    width: 100%;
+    border: 0;
 
-.autocomplete__results__item--error
-  color red
+    &:focus {
+      outline: none;
+    }
+  }
+}
 
-.autocomplete__results__item
-  padding 7px 10px
-  cursor pointer
-  &:hover
-    background rgba(0, 180, 255, 0.075)
-  &.autocomplete__selected
-    background rgba(0, 180, 255, 0.15)
+.autocomplete--clear {
+  cursor: pointer;
+}
 
-.autocomplete__icon
-  height 14px
-  width 14px
+.autocomplete__results {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  z-index: 1000;
+  position: absolute;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: 0;
+  color: black;
+}
 
-.animate-spin
-  animation spin 2s infinite linear
+.autocomplete__results__item--error {
+  color: red;
+}
 
-@keyframes spin
-  from
-    transform rotate(0deg)
-  to
-    transform rotate(360deg)
+.autocomplete__results__item {
+  padding: 7px 10px;
+  cursor: pointer;
 
+  &:hover {
+    background: rgba(0, 180, 255, 0.075);
+  }
 
+  &.autocomplete__selected {
+    background: rgba(0, 180, 255, 0.15);
+  }
+}
+
+.autocomplete__icon {
+  height: 14px;
+  width: 14px;
+}
+
+.animate-spin {
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 </style>
